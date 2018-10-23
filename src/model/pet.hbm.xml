@@ -1,0 +1,83 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="model">
+    <!-- 标识一个类的xml映射,name为类名,table为表名 -->
+    <class name="bean_appointment" table="appointment">
+        <!-- 主键的设置,generator标识主键生成方式,因为native便于数据库的移植所以.嘿嘿!你懂的 -->
+        <id name="appointment_id" type="int">
+            <column name="appointment_id"/>
+            <generator class="assigned"/>
+        </id>
+        <!-- 这里配了该类一个属性街道名称 name属性字段,column,数据库对应列 -->
+        <property name="product_id" type="int" column="product_id" />
+        <!-- 这里同上,写法不同而已 -->
+        <property name="appointment_begin_time" type="date" column="appointment_begin_time"/>
+        <property name="appointment_end_time" type="date" column="appointment_end_time"/>
+        <property name="circumstance" type="string" column="circumstance"/>
+        <property name="user_id" type="string" column="user_id"/>
+        <property name="pet_id" type="int" column="pet_id"/>
+    </class>
+
+    <class name="bean_user_information" table="user_information">
+        <id name="user_id" type="string">
+            <column name="user_id"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="phone_number" type="string" column="phone_number"/>
+        <property name="order_id" type="int" column="order_id"/>
+        <property name="appointment" type="int" column="appointment"/>
+        <property name="pet_id" type="int" column="pet_id"/>
+        <property name="user_name" type="string" column="user_name"/>
+        <property name="password" type="string" column="user_password"/>
+        <property name="email" type="string" column="email"/>
+        <property name="other_contact" type="string" column="other_contact"/>
+        <property name="authority" type="string" column="authority"/>
+    </class>
+    
+    <class name="bean_order" table="orders">
+        <id name="order_id" type="int">
+            <column name="order_id"/>
+            <generator class="native"/>
+        </id>
+        <property name="product_id" type="int" column="product_id"/>
+        <property name="order_begin_time" type="date" column="begin_time"/>
+        <property name="order_end_time" type="date" column="end_time"/>
+        <property name="quantity" type="int" column="quantity"/>
+        <property name="order_price" type="double" column="order_price"/>
+        <property name="transfer_state" type="string" column="transfer_state"/>
+        <property name="user_id" type="string" column="user_id"/>
+    </class>
+
+    <class name="bean_products_types" table="products_types">
+        <id name="type_id" type="int">
+            <column name="type_id"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="type_name" type="string" column="type_name"/>
+        <property name="type_describe" type="string" column="type_describe"/>
+    </class>
+
+    <class name="bean_products_information" table="products_information">
+        <id name="product_id" type="int">
+            <column name="product_id"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="product_name" type="string" column="product_name"/>
+        <property name="types" type="int" column="type_id"/>
+        <property name="brand" type="string" column="brand"/>
+        <property name="product_code" type="string" column="product_code"/>
+        <property name="price" type="double" column="price"/>
+    </class>
+
+    <class name="bean_pet_information" table="pet_information">
+        <id name="pet_id" type="int">
+            <column name="pet_id"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="nick_name" type="string" column="nick_name"/>
+        <property name="pet_name" type="string" column="pet_name"/>
+        <property name="pet_owner" type="string" column="pet_owner"/>
+        <property name="picture_path" type="blob" column="picture"/>
+        <property name="pet_age" type="int" column="pet_age"/>
+        <property name="healthy" type="string" column="healthy"/>
+    </class>
+</hibernate-mapping>
